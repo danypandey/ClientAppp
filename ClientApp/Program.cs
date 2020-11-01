@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
 using UserCommonApp;
-using Ziroh.Misc.Logging;
 
 namespace ClientApp
 {
