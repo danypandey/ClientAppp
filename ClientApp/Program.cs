@@ -10,10 +10,10 @@ namespace ClientApp
         {
             SampleClient result = new SampleClient();
 
-            /*
-             *GET Request
-             */
-            Task<Result> detail = result.ValidateClientVersion("1.0");
+           /*
+            * GET Request
+            */
+            result.CheckVersionUpdate("1.1");
 
             Console.ReadKey();
         }

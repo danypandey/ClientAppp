@@ -15,7 +15,15 @@ namespace ClientApp
             client = new GenericRestClient(baseUri);
         }
 
-        public async Task<UserCommonApp.Result> ValidateClientVersion(string CurrentClientVersion)
+        public async Task CheckVersionUpdate(string clientVersion)
+        {
+            UserCommonApp.Result clientUpdateResult = await ValidateClientVersion(clientVersion);
+            Console.WriteLine(clientUpdateResult.Error_code);
+            Console.WriteLine(clientUpdateResult.MandatoryUpdate);
+        }
+
+
+        private async Task<UserCommonApp.Result> ValidateClientVersion(string CurrentClientVersion)
         {
             string relativeUrl = string.Format("/updateservice/{0}", CurrentClientVersion);
             UserCommonApp.Result versionResult = null;
