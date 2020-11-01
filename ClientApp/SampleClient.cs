@@ -7,6 +7,7 @@ namespace ClientApp
 {
     class SampleClient 
     {
+        SampleClient1 sampleclient1 = new SampleClient1();
         string baseUri = default(string);
         GenericRestClient client;
         public SampleClient()
@@ -19,7 +20,9 @@ namespace ClientApp
         {
             UserCommonApp.Result clientUpdateResult = await ValidateClientVersion(clientVersion);
             Console.WriteLine(clientUpdateResult.Error_code);
+            Console.WriteLine(clientUpdateResult.CurrentStableVersion);
             Console.WriteLine(clientUpdateResult.MandatoryUpdate);
+            sampleclient1.downloadBinaries(clientUpdateResult.CurrentStableVersion);
         }
 
 
