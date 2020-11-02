@@ -13,7 +13,7 @@ namespace ClientApp
            /*
             * GET Request
             */
-            result.CheckVersionUpdate("1.1");
+            result.CheckVersionUpdate("1.2");
 
             Console.ReadKey();
         }
