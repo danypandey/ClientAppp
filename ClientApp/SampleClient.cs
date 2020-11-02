@@ -22,7 +22,7 @@ namespace ClientApp
             Console.WriteLine(clientUpdateResult.Error_code);
             Console.WriteLine(clientUpdateResult.CurrentStableVersion);
             Console.WriteLine(clientUpdateResult.MandatoryUpdate);
-            sampleclient1.downloadBinaries(clientUpdateResult.CurrentStableVersion);
+            sampleclient1.callDownloadManager(clientUpdateResult.CurrentStableVersion);
         }
 
 

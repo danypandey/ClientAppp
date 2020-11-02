@@ -15,12 +15,12 @@ namespace ClientApp
             client = new GenericRestClient(baseUri);
         }
 
-        public async Task downloadBinaries(string versionNumber)
+        public async Task callDownloadManager(string versionNumber)
         {
-            DownloadBinaries(versionNumber);
+            CallingDownloadManager(versionNumber);
         }
 
-        private async Task DownloadBinaries(string VersionNumber)
+        private async Task CallingDownloadManager(string VersionNumber)
         {
             string relativeUrl = string.Format("/updateservice/download/{0}", VersionNumber);
             UserCommonApp.Result versionResult = null;
