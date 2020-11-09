@@ -5,26 +5,22 @@ using Ziroh.Misc.Common;
 
 namespace ClientApp
 {
-    class SampleClient1
+    class DownloadManagerClient
     {
         string baseUri = default(string);
         GenericRestClient client;
-        public SampleClient1()
+        public DownloadManagerClient()
         {
             baseUri = "http://127.0.0.1:8001";
             client = new GenericRestClient(baseUri);
         }
 
-        public async Task callDownloadManager(string versionNumber)
-        {
-            CallingDownloadManager(versionNumber);
-        }
 
-        private async Task CallingDownloadManager(string VersionNumber)
+        internal async Task callDownloadManager(string VersionNumber)
         {
             string relativeUrl = string.Format("/updateservice/download/{0}", VersionNumber);
-            UserCommonApp.Result versionResult = null;
-            Action<UserCommonApp.Result> onSuccess = new Action<UserCommonApp.Result>((validateResult =>
+            ValidationResponse versionResult = null;
+            Action<ValidationResponse> onSuccess = new Action<ValidationResponse>((validateResult =>
             {
                 versionResult = validateResult;
             }));
