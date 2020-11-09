@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Runtime.InteropServices;
 using UserCommonApp;
+using Newtonsoft.Json;
 
 namespace ClientApp
 {
@@ -10,10 +12,34 @@ namespace ClientApp
             UpdateClient updateclient = new UpdateClient();
             DownloadManagerClient downloadmanagerclient = new DownloadManagerClient();
 
+            string clientVersion = "1.1";
+
+            string clientplatform = GetOperatingSystem();
+
+            string OS_Bit = null;
+
+            if (Environment.Is64BitOperatingSystem)
+            {
+                OS_Bit = "64-bit";
+            }
+            else
+            {
+                OS_Bit = "32-bit";
+            }
+
+            ValidationResponse clientconfiguration = new ValidationResponse();
+            {
+                clientconfiguration.clientPlatform = clientplatform;
+                clientconfiguration.ClientOS_Bit = OS_Bit;
+                clientconfiguration.ClientVersionNumber = clientVersion;
+            }
+
+            string json = JsonConvert.SerializeObject(clientconfiguration);
+
             /*
              * GET Request
              */
-            ValidationResponse validationResult = updateclient.ValidateClientVersion("1.2").GetAwaiter().GetResult();
+            ValidationResponse validationResult = updateclient.ValidateClientVersion(json).GetAwaiter().GetResult();
 
             if(validationResult.error_code != 0)
             {
@@ -29,6 +55,8 @@ namespace ClientApp
                     if (userInput == 0)
                     {
                         Console.WriteLine("Update Cancelled");
+
+                        //set skipped version of user in server
                     }
                     else if (userInput == 1)
                     {
@@ -45,6 +73,29 @@ namespace ClientApp
             //Console.WriteLine("Continuing with ostore application without update.");
 
             Console.ReadKey();
+        }
+
+        public static string GetOperatingSystem()
+        {
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
+            {
+                return "OSX";
+            }
+
+            else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+            {
+                return "Linux";
+            }
+
+            else if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+            {
+                return "Windows";
+            }
+
+            else
+            {
+                throw new Exception("Cannot Determine Operating System");
+            }
         }
     }
 }

@@ -17,9 +17,9 @@ namespace ClientApp
         }
 
 
-        internal async Task<ValidationResponse> ValidateClientVersion(string CurrentClientVersion)
+        internal async Task<ValidationResponse> ValidateClientVersion(string ClienConfiguration)
         {
-            string relativeUrl = string.Format("/updateservice/{0}", CurrentClientVersion);
+            string relativeUrl = string.Format("/updateservice/{0}", ClienConfiguration);
             ValidationResponse versionResult = null;
             Action<ValidationResponse> onSuccess = new Action<ValidationResponse>((validateResult =>
             {
