@@ -24,7 +24,7 @@ namespace ClientApp
                 }
                 else
                 {
-                    Console.WriteLine("Its not a mandatory update, please press 1 to update or 0 to cancel");
+                    Console.WriteLine("Its not a mandatory update, please press 1 to update or 0 to skip.");
                     int userInput = int.Parse(Console.ReadLine());
                     if (userInput == 0)
                     {
@@ -40,10 +40,9 @@ namespace ClientApp
             else
             {
                 Console.WriteLine("Your Application is Up-To-Date");
-                Environment.Exit(0);
             }
 
-            Console.WriteLine("Continuing with ostore application without update.");
+            //Console.WriteLine("Continuing with ostore application without update.");
 
             Console.ReadKey();
         }
