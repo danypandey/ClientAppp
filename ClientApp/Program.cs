@@ -29,10 +29,10 @@ namespace ClientApp
                     if (userInput == 0)
                     {
                         Console.WriteLine("Update Cancelled");
-                        Environment.Exit(0);
                     }
                     else if (userInput == 1)
                     {
+                        Console.WriteLine("Calling Download Manager.");
                         downloadmanagerclient.callDownloadManager(validationResult.CurrentStableVersion);
                     }
                 }
@@ -42,7 +42,8 @@ namespace ClientApp
                 Console.WriteLine("Your Application is Up-To-Date");
                 Environment.Exit(0);
             }
-            
+
+            Console.WriteLine("Continuing with ostore application without update.");
 
             Console.ReadKey();
         }

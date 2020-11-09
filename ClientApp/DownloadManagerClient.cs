@@ -28,7 +28,7 @@ namespace ClientApp
             {
                 Console.WriteLine("http failure " + failure.Message);
             });
-            await client.GetAsync(onSuccess, onFailure, relativeUrl);
+            client.GetAsync(onSuccess, onFailure, relativeUrl);
         }
     }
 }
