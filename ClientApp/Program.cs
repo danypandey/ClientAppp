@@ -41,42 +41,50 @@ namespace ClientApp
              */
             ValidationResponse validationResult = updateclient.ValidateClientVersion(clientConfig).GetAwaiter().GetResult();
 
-            if(validationResult.error_code != 0)
+            if(validationResult.error_code == 0)
             {
-                ValidationResponse downloadManagerConfiguration = new ValidationResponse();
+                if(validationResult.isUpdateAvailable)
                 {
-                    downloadManagerConfiguration.clientPlatform = clientplatform;
-                    downloadManagerConfiguration.is64Bit = is64bit;
-                    downloadManagerConfiguration.CurrentStableVersion = validationResult.CurrentStableVersion;
-                }
+                    ValidationResponse downloadManagerConfiguration = new ValidationResponse();
+                    {
+                        downloadManagerConfiguration.clientPlatform = clientplatform;
+                        downloadManagerConfiguration.is64Bit = is64bit;
+                        downloadManagerConfiguration.CurrentStableVersion = validationResult.CurrentStableVersion;
+                    }
 
-                string clientDownloadConfig = JsonConvert.SerializeObject(downloadManagerConfiguration);
+                    string clientDownloadConfig = JsonConvert.SerializeObject(downloadManagerConfiguration);
 
-                if (validationResult.MandatoryUpdate)
-                {
-                    Console.WriteLine("Its a mandatory update, calling Download Manager.");
-                    downloadmanagerclient.callDownloadManager(clientDownloadConfig);
+                    if (validationResult.MandatoryUpdate)
+                    {
+                        Console.WriteLine("Its a mandatory update, calling Download Manager.");
+                        downloadmanagerclient.callDownloadManager(clientDownloadConfig);
+                    }
+                    else
+                    {
+                        Console.WriteLine("Its not a mandatory update, please press 1 to update or 0 to skip.");
+                        int userInput = int.Parse(Console.ReadLine());
+                        if (userInput == 0)
+                        {
+                            Console.WriteLine("Update Cancelled");
+
+                            //set skipped version of user in server
+                        }
+                        else if (userInput == 1)
+                        {
+                            Console.WriteLine("Calling Download Manager.");
+                            downloadmanagerclient.callDownloadManager(clientDownloadConfig);
+                        }
+                    }
                 }
                 else
                 {
-                    Console.WriteLine("Its not a mandatory update, please press 1 to update or 0 to skip.");
-                    int userInput = int.Parse(Console.ReadLine());
-                    if (userInput == 0)
-                    {
-                        Console.WriteLine("Update Cancelled");
-
-                        //set skipped version of user in server
-                    }
-                    else if (userInput == 1)
-                    {
-                        Console.WriteLine("Calling Download Manager.");
-                        downloadmanagerclient.callDownloadManager(clientDownloadConfig);
-                    }
+                    Console.WriteLine("Your Application is Up-To-Date");
                 }
             }
             else
             {
-                Console.WriteLine("Your Application is Up-To-Date");
+                // Handle errors here
+                Console.WriteLine(validationResult.error_code);
             }
 
             //Console.WriteLine("Continuing with ostore application without update.");
