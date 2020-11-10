@@ -16,37 +16,46 @@ namespace ClientApp
 
             string clientplatform = GetOperatingSystem();
 
-            string OS_Bit = null;
+            bool is64bit;
 
             if (Environment.Is64BitOperatingSystem)
             {
-                OS_Bit = "64-bit";
+                is64bit = true;
             }
             else
             {
-                OS_Bit = "32-bit";
+                is64bit = false;
             }
 
             ValidationResponse clientconfiguration = new ValidationResponse();
             {
                 clientconfiguration.clientPlatform = clientplatform;
-                clientconfiguration.ClientOS_Bit = OS_Bit;
+                clientconfiguration.is64Bit = is64bit;
                 clientconfiguration.ClientVersionNumber = clientVersion;
             }
 
-            string json = JsonConvert.SerializeObject(clientconfiguration);
+            string clientConfig = JsonConvert.SerializeObject(clientconfiguration);
 
             /*
              * GET Request
              */
-            ValidationResponse validationResult = updateclient.ValidateClientVersion(json).GetAwaiter().GetResult();
+            ValidationResponse validationResult = updateclient.ValidateClientVersion(clientConfig).GetAwaiter().GetResult();
 
             if(validationResult.error_code != 0)
             {
-                if(validationResult.MandatoryUpdate)
+                ValidationResponse downloadManagerConfiguration = new ValidationResponse();
+                {
+                    downloadManagerConfiguration.clientPlatform = clientplatform;
+                    downloadManagerConfiguration.is64Bit = is64bit;
+                    downloadManagerConfiguration.CurrentStableVersion = validationResult.CurrentStableVersion;
+                }
+
+                string clientDownloadConfig = JsonConvert.SerializeObject(downloadManagerConfiguration);
+
+                if (validationResult.MandatoryUpdate)
                 {
                     Console.WriteLine("Its a mandatory update, calling Download Manager.");
-                    downloadmanagerclient.callDownloadManager(validationResult.CurrentStableVersion);
+                    downloadmanagerclient.callDownloadManager(clientDownloadConfig);
                 }
                 else
                 {
@@ -61,7 +70,7 @@ namespace ClientApp
                     else if (userInput == 1)
                     {
                         Console.WriteLine("Calling Download Manager.");
-                        downloadmanagerclient.callDownloadManager(validationResult.CurrentStableVersion);
+                        downloadmanagerclient.callDownloadManager(clientDownloadConfig);
                     }
                 }
             }
