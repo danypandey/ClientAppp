@@ -16,9 +16,9 @@ namespace ClientApp
         }
 
 
-        internal async Task callDownloadManager(string clientConfiguration)
+        internal async Task callDownloadManager(string UpgradeReferenceId)
         {
-            string relativeUrl = string.Format("/updateservice/download/{0}", clientConfiguration);
+            string relativeUrl = string.Format("/updateservice/download/{0}", UpgradeReferenceId);
             ValidationResponse versionResult = null;
             Action<ValidationResponse> onSuccess = new Action<ValidationResponse>((validateResult =>
             {

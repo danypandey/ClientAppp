@@ -45,19 +45,10 @@ namespace ClientApp
             {
                 if(validationResult.isUpdateAvailable)
                 {
-                    ValidationResponse downloadManagerConfiguration = new ValidationResponse();
-                    {
-                        downloadManagerConfiguration.clientPlatform = clientplatform;
-                        downloadManagerConfiguration.is64Bit = is64bit;
-                        downloadManagerConfiguration.CurrentStableVersion = validationResult.CurrentStableVersion;
-                    }
-
-                    string clientDownloadConfig = JsonConvert.SerializeObject(downloadManagerConfiguration);
-
                     if (validationResult.MandatoryUpdate)
                     {
                         Console.WriteLine("Its a mandatory update, calling Download Manager.");
-                        downloadmanagerclient.callDownloadManager(clientDownloadConfig);
+                        downloadmanagerclient.callDownloadManager(validationResult.UpgradeReferenceId);
                     }
                     else
                     {
@@ -72,7 +63,7 @@ namespace ClientApp
                         else if (userInput == 1)
                         {
                             Console.WriteLine("Calling Download Manager.");
-                            downloadmanagerclient.callDownloadManager(clientDownloadConfig);
+                            downloadmanagerclient.callDownloadManager(validationResult.UpgradeReferenceId);
                         }
                     }
                 }
@@ -96,7 +87,7 @@ namespace ClientApp
         {
             if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
             {
-                return "OSX";
+                return "MAC";
             }
 
             else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
