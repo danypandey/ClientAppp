@@ -8,19 +8,17 @@ namespace ClientApp
     class DownloadManagerClient
     {
         string baseUri = default(string);
-        string relativeUri = default(string);
         GenericRestClient client;
 
-        public DownloadManagerClient(string baseUri, string relativeUri)
+        public DownloadManagerClient(string baseUri)
         {
             baseUri = baseUri;
-            relativeUri = relativeUri;
             client = new GenericRestClient(baseUri);
         }
 
         internal async Task callDownloadManager(string UpgradeReferenceId)
         {
-            string relativeUrl = string.Format(relativeUri, UpgradeReferenceId);
+            string relativeUrl = string.Format("/updateservice/download/{0}", UpgradeReferenceId);
             ValidationResponse DownloadManagerServerResponse = null;
             Action<ValidationResponse> onSuccess = new Action<ValidationResponse>((validateResult =>
             {

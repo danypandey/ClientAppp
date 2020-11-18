@@ -5,22 +5,20 @@ using Ziroh.Misc.Common;
 
 namespace ClientApp
 {
-    class UpgradeClientManager 
+    class UpgradeManagerClient
     {
         string baseUri = default(string);
-        string relativeUri = default(string);
         GenericRestClient client;
 
-        public UpgradeClientManager(string baseUri, string relativeUri)
+        public UpgradeManagerClient(string baseUri)
         {
-            baseUri = baseUri; 
-            relativeUri = relativeUri;
+            baseUri = baseUri;
             client = new GenericRestClient(baseUri);
         }
 
         internal async Task<ValidationResponse> ValidateClientVersion(string ClienConfiguration)
         {
-            string relativeUrl = string.Format(relativeUri, ClienConfiguration);
+            string relativeUrl = string.Format("/updateservice/{0}", ClienConfiguration);
             ValidationResponse UpgradeClientManagerResponse = null;
             Action<ValidationResponse> onSuccess = new Action<ValidationResponse>((validateResult =>
             {
@@ -36,6 +34,6 @@ namespace ClientApp
             });
             await client.GetAsync(onSuccess, onFailure, relativeUrl);
             return UpgradeClientManagerResponse;
-        }        
+        }
     }
 }
