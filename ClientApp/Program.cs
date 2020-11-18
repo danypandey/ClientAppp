@@ -9,8 +9,14 @@ namespace ClientApp
     {
         static void Main(string[] args)
         {
-            UpdateClient updateclient = new UpdateClient();
-            DownloadManagerClient downloadmanagerclient = new DownloadManagerClient();
+            string UpdateClientBaseUri = "http://127.0.0.1:8080";
+            string UpdateClientRelativeUri = "/updateservice/{0}";
+
+            string DownloadManagerClientBaseUri = "http://127.0.0.1:8001";
+            string DownloadManagerClientRelativeUri = "/updateservice/download/{0}";
+
+            UpgradeClientManager updateclient = new UpgradeClientManager(UpdateClientBaseUri, UpdateClientRelativeUri);
+            DownloadManagerClient downloadmanagerclient = new DownloadManagerClient(DownloadManagerClientBaseUri, DownloadManagerClientRelativeUri);
 
             string clientVersion = "1.1";
 

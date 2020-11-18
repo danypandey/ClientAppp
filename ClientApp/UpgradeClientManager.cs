@@ -5,33 +5,37 @@ using Ziroh.Misc.Common;
 
 namespace ClientApp
 {
-    class UpdateClient 
+    class UpgradeClientManager 
     {
-        DownloadManagerClient sampleclient1 = new DownloadManagerClient();
         string baseUri = default(string);
+        string relativeUri = default(string);
         GenericRestClient client;
-        public UpdateClient()
+
+        public UpgradeClientManager(string baseUri, string relativeUri)
         {
-            baseUri = "http://127.0.0.1:8080";
+            baseUri = baseUri; 
+            relativeUri = relativeUri;
             client = new GenericRestClient(baseUri);
         }
 
-
         internal async Task<ValidationResponse> ValidateClientVersion(string ClienConfiguration)
         {
-            string relativeUrl = string.Format("/updateservice/{0}", ClienConfiguration);
-            ValidationResponse versionResult = null;
+            string relativeUrl = string.Format(relativeUri, ClienConfiguration);
+            ValidationResponse UpgradeClientManagerResponse = null;
             Action<ValidationResponse> onSuccess = new Action<ValidationResponse>((validateResult =>
             {
-                versionResult = validateResult;
+                UpgradeClientManagerResponse = validateResult;
             }));
             Action<HttpFailure> onFailure = new Action<HttpFailure>((failure) =>
             {
-                Console.WriteLine("http failure " + failure.Message);
+                UpgradeClientManagerResponse = new ValidationResponse()
+                {
+                    error_code = 1,
+                    error_message = failure.Message
+                };
             });
             await client.GetAsync(onSuccess, onFailure, relativeUrl);
-
-            return versionResult;
+            return UpgradeClientManagerResponse;
         }        
     }
 }

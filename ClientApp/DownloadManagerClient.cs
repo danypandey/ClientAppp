@@ -8,25 +8,31 @@ namespace ClientApp
     class DownloadManagerClient
     {
         string baseUri = default(string);
+        string relativeUri = default(string);
         GenericRestClient client;
-        public DownloadManagerClient()
+
+        public DownloadManagerClient(string baseUri, string relativeUri)
         {
-            baseUri = "http://127.0.0.1:8001";
+            baseUri = baseUri;
+            relativeUri = relativeUri;
             client = new GenericRestClient(baseUri);
         }
 
-
         internal async Task callDownloadManager(string UpgradeReferenceId)
         {
-            string relativeUrl = string.Format("/updateservice/download/{0}", UpgradeReferenceId);
-            ValidationResponse versionResult = null;
+            string relativeUrl = string.Format(relativeUri, UpgradeReferenceId);
+            ValidationResponse DownloadManagerServerResponse = null;
             Action<ValidationResponse> onSuccess = new Action<ValidationResponse>((validateResult =>
             {
-                versionResult = validateResult;
+                DownloadManagerServerResponse = validateResult;
             }));
             Action<HttpFailure> onFailure = new Action<HttpFailure>((failure) =>
             {
-                Console.WriteLine("http failure " + failure.Message);
+                DownloadManagerServerResponse = new ValidationResponse()
+                {
+                    error_code = 1,
+                    error_message = failure.Message
+                };
             });
             client.GetAsync(onSuccess, onFailure, relativeUrl);
         }
