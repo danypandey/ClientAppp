@@ -31,7 +31,8 @@ namespace ClientApp
                 is64bit = false;
             }
 
-            ValidationResponse clientconfiguration = new ValidationResponse();
+
+            ClientResponse clientconfiguration = new ClientResponse();
             {
                 clientconfiguration.clientPlatform = clientplatform;
                 clientconfiguration.is64Bit = is64bit;
@@ -76,11 +77,11 @@ namespace ClientApp
                     Console.WriteLine("Your Application is Up-To-Date");
                 }
             }
-            else
+            /*else
             {
                 // Handle errors here
                 Console.WriteLine(validationResult.error_code);
-            }
+            }*/
 
             //Console.WriteLine("Continuing with ostore application without update.");
 

@@ -34,13 +34,13 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="BouncyCastle.Crypto">
-      <HintPath>..\..\Ziroh Libraries\Library1\BouncyCastle.Crypto.dll</HintPath>
+      <HintPath>..\..\..\..\Softwares\New folder (2)\BouncyCastle.Crypto.dll</HintPath>
     </Reference>
     <Reference Include="MediaInfo.Wrapper">
-      <HintPath>..\..\Ziroh Libraries\Library1\MediaInfo.Wrapper.dll</HintPath>
+      <HintPath>..\..\..\..\Softwares\New folder (2)\MediaInfo.Wrapper.dll</HintPath>
     </Reference>
     <Reference Include="MimeKit">
-      <HintPath>..\..\Ziroh Libraries\Library1\MimeKit.dll</HintPath>
+      <HintPath>..\..\..\..\Softwares\New folder (2)\MimeKit.dll</HintPath>
     </Reference>
     <Reference Include="MongoDB.Bson">
       <HintPath>..\..\Ziroh Libraries\Library1\MongoDB.Bson.dll</HintPath>
@@ -67,13 +67,13 @@
       <HintPath>..\..\UserCommonApp\UserCommonApp\bin\Debug\UserCommonApp.dll</HintPath>
     </Reference>
     <Reference Include="Ziroh.CommonLibrary">
-      <HintPath>..\..\Ziroh Libraries\Library1\Ziroh.CommonLibrary.dll</HintPath>
+      <HintPath>..\..\..\..\Softwares\New folder (2)\Ziroh.CommonLibrary.dll</HintPath>
     </Reference>
     <Reference Include="Ziroh.CommonLibrary2">
-      <HintPath>..\..\Ziroh Libraries\Library1\Ziroh.CommonLibrary2.dll</HintPath>
+      <HintPath>..\..\..\..\Softwares\New folder (2)\Ziroh.CommonLibrary2.dll</HintPath>
     </Reference>
     <Reference Include="Ziroh.WebServicesAndLogging">
-      <HintPath>..\..\Ziroh Libraries\Library1\Ziroh.WebServicesAndLogging.dll</HintPath>
+      <HintPath>..\..\..\..\Softwares\New folder (2)\Ziroh.WebServicesAndLogging.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
