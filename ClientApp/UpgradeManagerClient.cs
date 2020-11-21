@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net;
 using System.Threading.Tasks;
 using UserCommonApp;
 using Ziroh.Misc.Common;
@@ -12,6 +13,7 @@ namespace ClientApp
 
         public UpgradeManagerClient(string baseUri)
         {
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
             baseUri = baseUri;
             client = new GenericRestClient(baseUri);
         }

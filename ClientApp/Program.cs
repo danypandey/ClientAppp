@@ -3,6 +3,7 @@ using System.Runtime.InteropServices;
 using UserCommonApp;
 using Newtonsoft.Json;
 
+
 namespace ClientApp
 {
     class Program
@@ -12,6 +13,7 @@ namespace ClientApp
             string UpdateClientBaseUri = "http://127.0.0.1:8080";
 
             string DownloadManagerClientBaseUri = "http://127.0.0.1:8001";
+
 
             UpgradeManagerClient updateclient = new UpgradeManagerClient(UpdateClientBaseUri);
             DownloadManagerClient downloadmanagerclient = new DownloadManagerClient(DownloadManagerClientBaseUri);
@@ -77,11 +79,11 @@ namespace ClientApp
                     Console.WriteLine("Your Application is Up-To-Date");
                 }
             }
-            /*else
+            else
             {
                 // Handle errors here
                 Console.WriteLine(validationResult.error_code);
-            }*/
+            }
 
             //Console.WriteLine("Continuing with ostore application without update.");
 
