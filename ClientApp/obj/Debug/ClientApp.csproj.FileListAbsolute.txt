@@ -18,3 +18,4 @@ D:\Ziroh Labs\Internship Date(8-10-2020)\OStorUpdateManager\ClientAppp\ClientApp
 D:\Ziroh Labs\Internship Date(8-10-2020)\OStorUpdateManager\ClientAppp\ClientApp\obj\Debug\Ziroh.Local.DeviceLibrary.exe
 D:\Ziroh Labs\Internship Date(8-10-2020)\OStorUpdateManager\ClientAppp\ClientApp\obj\Debug\Ziroh.Local.DeviceLibrary.pdb
 D:\Ziroh Labs\Internship Date(8-10-2020)\OStorUpdateManager\ClientAppp\ClientApp\obj\Debug\ClientApp.csprojAssemblyReference.cache
+D:\Ziroh Labs\Internship Date(8-10-2020)\OStorUpdateManager\ClientAppp\ClientApp\bin\Debug\Newtonsoft.Json.xml
